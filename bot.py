@@ -675,8 +675,7 @@ def trim_silence_ffmpeg(in_path: str, out_path: str) -> None:
 # ---------------- UI ----------------
 def main_menu_kb(approved: bool, last_sheikh: str = "", fav_count: int = 0):
     buttons = [
-        [InlineKeyboardButton("🔎 بحث عن شيخ", callback_data="menu:search")],
-        [InlineKeyboardButton("📚 عرض المشايخ", callback_data="menu:browse:0")],
+           [InlineKeyboardButton("👥 عرض الأئمة", callback_data="menu:browse:0")],
     ]
 
     # Quick access (optional but requested)
