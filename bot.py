@@ -1102,7 +1102,7 @@ async def receive_media(update: Update, context: ContextTypes.DEFAULT_TYPE):
             out_path = os.path.join(td, "cleaned.mp3")
 
             # Download to disk
-            await tg_file.download_to_drive(custom_path=in_path)
+            await tg_file.download_to_drive(in_path)
 
             # Try trimming using ffmpeg (if available)
             if _ffmpeg_exists():
