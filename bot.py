@@ -61,10 +61,8 @@ FFMPEG_SILENCE_FILTER = (
 
 # Period presets for faster upload UX (optional)
 PERIOD_PRESETS = [
-    ("رمضان", "preset:period:رمضان"),
     ("تراويح", "preset:period:تراويح"),
     ("تهجد", "preset:period:تهجد"),
-    ("قيام", "preset:period:قيام"),
 ]
 
 
