@@ -7,6 +7,9 @@ import time
 import tempfile
 import subprocess
 import urllib.request
+import subprocess
+import tempfile
+import shutil
 from datetime import datetime
 from urllib.parse import urlparse
 
@@ -158,7 +161,32 @@ def _dt_to_ts(s: str) -> float:
         return dt.timestamp()
     except Exception:
         return 0.0
+def ffmpeg_exists() -> bool:
+    return shutil.which("ffmpeg") is not None
 
+
+def clean_audio_ffmpeg(in_path: str, out_path: str) -> None:
+    audio_filter = (
+        "highpass=f=80,"
+        "lowpass=f=12000,"
+        "afftdn=nf=-25,"
+        "silenceremove=start_periods=1:start_duration=0.4:start_threshold=-35dB:"
+        "stop_periods=1:stop_duration=0.6:stop_threshold=-35dB,"
+        "loudnorm=I=-16:TP=-1.5:LRA=11"
+    )
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", in_path,
+        "-vn",
+        "-af", audio_filter,
+        "-c:a", "libmp3lame", "-q:a", "4",
+        out_path
+    ]
+
+    p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if p.returncode != 0:
+        raise RuntimeError(f"ffmpeg failed:\n{p.stderr[-2000:]}")
 
 # ---------------- DB ----------------
 def init_db():
