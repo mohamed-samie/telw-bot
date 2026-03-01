@@ -681,7 +681,7 @@ def main_menu_kb(approved: bool, last_sheikh: str = "", fav_count: int = 0):
     # Quick access (optional but requested)
     if last_sheikh:
         k = upsert_sheikh_key(last_sheikh)
-        buttons.append([InlineKeyboardButton("⚡ آخر شيخ", callback_data=f"sheikhk:{k}")])
+        buttons.append([InlineKeyboardButton(" آخر شيخ", callback_data=f"sheikhk:{k}")])
 
     if fav_count > 0:
         buttons.append([InlineKeyboardButton("⭐ مفضلتي", callback_data="menu:favs:0")])
